@@ -8,8 +8,9 @@ The code will be gradually updated as the video course progresses.
 At the moment, the project code is relevant up to and including video number 55 (this line will be updated).
 
 **Important note!!!**
-1. You need to select the **WindowsForm** template and specify **.NET Framework 4.8**.
-2. For the project to build and work without errors, you need to install the **RibbonWinForms** version 5.0.1.1 package, and also include **System.Numerics** in the project dependencies.
+1. The code is created in Visual Studio 2022.
+2. You need to select the **WindowsForm** template and specify **.NET Framework 4.8**.
+3. For the project to build and work without errors, you need to install the **RibbonWinForms** version 5.0.1.1 package, and also include **System.Numerics** in the project dependencies.
 
 Some comments:
 1. The code is written entirely by hand and repeats everything in the video. However, the program does not work correctly in some cases. For example:
@@ -28,8 +29,9 @@ Some comments:
 На данный момент код проекта актуален до видео номер 55 включительно (эта строка будет обновляться).
 
 **Важные замечания!!!**
-1. При выборе нового проекта вам нужно выбрать шаблон **WindowsForm** и указать **.NET Framework 4.8**.
-2. Чтобы проект собрался и работал без ошибок, вам нужно установить пакет **RibbonWinForms** версии 5.0.1.1, а так же в зависимостях проекта включить **System.Numerics**.
+1. Код создаётся в программе Visual Studio 2022.
+2. При выборе нового проекта вам нужно выбрать шаблон **WindowsForm** и указать **.NET Framework 4.8**.
+3. Чтобы проект собрался и работал без ошибок, вам нужно установить пакет **RibbonWinForms** версии 5.0.1.1, а так же в зависимостях проекта включить **System.Numerics**.
 
 Некоторые комментарии:
 
