@@ -7,8 +7,6 @@ A simple CAD editor project based on a series of videos by Mojtaba Javadi (https
 
 The code will be gradually updated as the video course progresses.
 
-At the moment, the project code is relevant up to and including video number 55 (this line will be updated).
-
 **Important note!!!**
 1. The code is created in Visual Studio 2022.
 2. You need to select the **WindowsForm** template and specify **.NET Framework 4.8**.
@@ -27,8 +25,6 @@ Some comments:
 Проект простого редактора САПР, основанный на серии видеороликов Mojtaba Javadi (https://www.youtube.com/@MjSharp).
 
 Код будет постепенно обновляться по мере прохождения видеокурса.
-
-На данный момент код проекта актуален до видео номер 55 включительно (эта строка будет обновляться).
 
 **Важные замечания!!!**
 1. Код создаётся в программе Visual Studio 2022.
