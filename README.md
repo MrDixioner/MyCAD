@@ -1,5 +1,7 @@
 # MyCAD
 
+![](https://i.imgur.com/26uH1JD.jpeg)
+
 ## ENG:
 A simple CAD editor project based on a series of videos by Mojtaba Javadi (https://www.youtube.com/@MjSharp).
 
