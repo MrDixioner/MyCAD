@@ -58,6 +58,8 @@ namespace MyCAD {
 		public bool Value5;
 
 		public Text tempText;
+		public List<Tables.TextStyle> textStyles = new List<Tables.TextStyle>();
+		public Tables.TextStyle currentStyle;
 		#endregion
 
 		#region " PictureBox events "
@@ -955,6 +957,16 @@ namespace MyCAD {
 			if (IsObjectSelected())
 				EnterBtn_Click(sender, null);
 
+		}
+
+		private void GraphicsForm_Load(object sender, EventArgs e) {
+			currentStyle = Tables.TextStyle.Default;
+			currentStyle.WidthFactor = 1.5;
+			currentStyle.IsBackward = true;
+			currentStyle.IsUpsideDown = true;
+			Tables.TextStyle newstyle = new Tables.TextStyle("impact");
+			textStyles.Add(currentStyle);
+			textStyles.Add(newstyle);
 		}
 
 		private ToolStripMenuItem toolitem;

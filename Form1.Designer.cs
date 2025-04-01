@@ -31,17 +31,6 @@
 			this.ribbon = new System.Windows.Forms.Ribbon();
 			this.drawTab = new System.Windows.Forms.RibbonTab();
 			this.drawPanel = new System.Windows.Forms.RibbonPanel();
-			this.zoomPanel = new System.Windows.Forms.RibbonPanel();
-			this.modifyTab = new System.Windows.Forms.RibbonTab();
-			this.editPanel = new System.Windows.Forms.RibbonPanel();
-			this.ribbonSeparator1 = new System.Windows.Forms.RibbonSeparator();
-			this.annotateTab = new System.Windows.Forms.RibbonTab();
-			this.textPanel = new System.Windows.Forms.RibbonPanel();
-			this.statusStrip = new System.Windows.Forms.StatusStrip();
-			this.coordinate = new System.Windows.Forms.ToolStripStatusLabel();
-			this.vS = new System.Windows.Forms.VScrollBar();
-			this.hS = new System.Windows.Forms.HScrollBar();
-			this.timer1 = new System.Windows.Forms.Timer(this.components);
 			this.arcBtn = new System.Windows.Forms.RibbonButton();
 			this.arcBtn11 = new System.Windows.Forms.RibbonButton();
 			this.arcBtn12 = new System.Windows.Forms.RibbonButton();
@@ -66,18 +55,29 @@
 			this.polygonBtn = new System.Windows.Forms.RibbonButton();
 			this.pointBtn = new System.Windows.Forms.RibbonButton();
 			this.rectangleBtn = new System.Windows.Forms.RibbonButton();
+			this.zoomPanel = new System.Windows.Forms.RibbonPanel();
 			this.zoomInBtn = new System.Windows.Forms.RibbonButton();
 			this.zoomOutBtn = new System.Windows.Forms.RibbonButton();
 			this.zoomWinBtn = new System.Windows.Forms.RibbonButton();
+			this.modifyTab = new System.Windows.Forms.RibbonTab();
+			this.editPanel = new System.Windows.Forms.RibbonPanel();
 			this.copyBtn = new System.Windows.Forms.RibbonButton();
 			this.moveBtn = new System.Windows.Forms.RibbonButton();
 			this.rotateBtn = new System.Windows.Forms.RibbonButton();
 			this.mirrorBtn = new System.Windows.Forms.RibbonButton();
 			this.scaleBtn = new System.Windows.Forms.RibbonButton();
+			this.ribbonSeparator1 = new System.Windows.Forms.RibbonSeparator();
 			this.lineararrayBtn = new System.Windows.Forms.RibbonButton();
 			this.circulararrayBtn = new System.Windows.Forms.RibbonButton();
 			this.deleteBtn = new System.Windows.Forms.RibbonButton();
+			this.annotateTab = new System.Windows.Forms.RibbonTab();
+			this.textPanel = new System.Windows.Forms.RibbonPanel();
 			this.stextBtn = new System.Windows.Forms.RibbonButton();
+			this.statusStrip = new System.Windows.Forms.StatusStrip();
+			this.coordinate = new System.Windows.Forms.ToolStripStatusLabel();
+			this.vS = new System.Windows.Forms.VScrollBar();
+			this.hS = new System.Windows.Forms.HScrollBar();
+			this.timer1 = new System.Windows.Forms.Timer(this.components);
 			this.drawing = new System.Windows.Forms.PictureBox();
 			this.popup.SuspendLayout();
 			this.statusStrip.SuspendLayout();
@@ -151,102 +151,6 @@
 			this.drawPanel.Items.Add(this.rectangleBtn);
 			this.drawPanel.Name = "drawPanel";
 			this.drawPanel.Text = "";
-			// 
-			// zoomPanel
-			// 
-			this.zoomPanel.ButtonMoreVisible = false;
-			this.zoomPanel.Items.Add(this.zoomInBtn);
-			this.zoomPanel.Items.Add(this.zoomOutBtn);
-			this.zoomPanel.Items.Add(this.zoomWinBtn);
-			this.zoomPanel.Name = "zoomPanel";
-			this.zoomPanel.Text = "";
-			// 
-			// modifyTab
-			// 
-			this.modifyTab.Name = "modifyTab";
-			this.modifyTab.Panels.Add(this.editPanel);
-			this.modifyTab.Text = "Modify";
-			// 
-			// editPanel
-			// 
-			this.editPanel.ButtonMoreVisible = false;
-			this.editPanel.Items.Add(this.copyBtn);
-			this.editPanel.Items.Add(this.moveBtn);
-			this.editPanel.Items.Add(this.rotateBtn);
-			this.editPanel.Items.Add(this.mirrorBtn);
-			this.editPanel.Items.Add(this.scaleBtn);
-			this.editPanel.Items.Add(this.ribbonSeparator1);
-			this.editPanel.Items.Add(this.lineararrayBtn);
-			this.editPanel.Items.Add(this.circulararrayBtn);
-			this.editPanel.Items.Add(this.deleteBtn);
-			this.editPanel.Name = "editPanel";
-			this.editPanel.Text = "";
-			// 
-			// ribbonSeparator1
-			// 
-			this.ribbonSeparator1.Name = "ribbonSeparator1";
-			// 
-			// annotateTab
-			// 
-			this.annotateTab.Name = "annotateTab";
-			this.annotateTab.Panels.Add(this.textPanel);
-			this.annotateTab.Text = "Annotate";
-			// 
-			// textPanel
-			// 
-			this.textPanel.ButtonMoreVisible = false;
-			this.textPanel.Items.Add(this.stextBtn);
-			this.textPanel.Name = "textPanel";
-			this.textPanel.Text = "";
-			// 
-			// statusStrip
-			// 
-			this.statusStrip.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.statusStrip.ImageScalingSize = new System.Drawing.Size(40, 40);
-			this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.coordinate});
-			this.statusStrip.Location = new System.Drawing.Point(0, 626);
-			this.statusStrip.Name = "statusStrip";
-			this.statusStrip.Size = new System.Drawing.Size(1111, 35);
-			this.statusStrip.TabIndex = 11;
-			this.statusStrip.Text = "statusStrip1";
-			// 
-			// coordinate
-			// 
-			this.coordinate.AutoSize = false;
-			this.coordinate.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) 
-            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) 
-            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
-			this.coordinate.BorderStyle = System.Windows.Forms.Border3DStyle.SunkenOuter;
-			this.coordinate.Name = "coordinate";
-			this.coordinate.Size = new System.Drawing.Size(250, 30);
-			this.coordinate.Text = "0.000, 0.000, 0.000";
-			// 
-			// vS
-			// 
-			this.vS.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.vS.Location = new System.Drawing.Point(1094, 135);
-			this.vS.Name = "vS";
-			this.vS.Size = new System.Drawing.Size(17, 471);
-			this.vS.TabIndex = 12;
-			this.vS.Visible = false;
-			this.vS.Scroll += new System.Windows.Forms.ScrollEventHandler(this.vS_Scroll);
-			// 
-			// hS
-			// 
-			this.hS.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.hS.Location = new System.Drawing.Point(0, 609);
-			this.hS.Name = "hS";
-			this.hS.Size = new System.Drawing.Size(1091, 17);
-			this.hS.TabIndex = 13;
-			this.hS.Visible = false;
-			this.hS.Scroll += new System.Windows.Forms.ScrollEventHandler(this.hS_Scroll);
-			// 
-			// timer1
-			// 
-			this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
 			// 
 			// arcBtn
 			// 
@@ -496,6 +400,15 @@
 			this.rectangleBtn.Text = "Rectangle";
 			this.rectangleBtn.Click += new System.EventHandler(this.DrawBtn_Click);
 			// 
+			// zoomPanel
+			// 
+			this.zoomPanel.ButtonMoreVisible = false;
+			this.zoomPanel.Items.Add(this.zoomInBtn);
+			this.zoomPanel.Items.Add(this.zoomOutBtn);
+			this.zoomPanel.Items.Add(this.zoomWinBtn);
+			this.zoomPanel.Name = "zoomPanel";
+			this.zoomPanel.Text = "";
+			// 
 			// zoomInBtn
 			// 
 			this.zoomInBtn.Image = global::MyCAD.Properties.Resources.ZoomIn1;
@@ -522,6 +435,27 @@
 			this.zoomWinBtn.SmallImage = ((System.Drawing.Image)(resources.GetObject("zoomWinBtn.SmallImage")));
 			this.zoomWinBtn.Text = "Zoom Win";
 			this.zoomWinBtn.Click += new System.EventHandler(this.ZoomBtn_Click);
+			// 
+			// modifyTab
+			// 
+			this.modifyTab.Name = "modifyTab";
+			this.modifyTab.Panels.Add(this.editPanel);
+			this.modifyTab.Text = "Modify";
+			// 
+			// editPanel
+			// 
+			this.editPanel.ButtonMoreVisible = false;
+			this.editPanel.Items.Add(this.copyBtn);
+			this.editPanel.Items.Add(this.moveBtn);
+			this.editPanel.Items.Add(this.rotateBtn);
+			this.editPanel.Items.Add(this.mirrorBtn);
+			this.editPanel.Items.Add(this.scaleBtn);
+			this.editPanel.Items.Add(this.ribbonSeparator1);
+			this.editPanel.Items.Add(this.lineararrayBtn);
+			this.editPanel.Items.Add(this.circulararrayBtn);
+			this.editPanel.Items.Add(this.deleteBtn);
+			this.editPanel.Name = "editPanel";
+			this.editPanel.Text = "";
 			// 
 			// copyBtn
 			// 
@@ -568,6 +502,10 @@
 			this.scaleBtn.Text = "Scale";
 			this.scaleBtn.Click += new System.EventHandler(this.ModifyBtn_Click);
 			// 
+			// ribbonSeparator1
+			// 
+			this.ribbonSeparator1.Name = "ribbonSeparator1";
+			// 
 			// lineararrayBtn
 			// 
 			this.lineararrayBtn.Image = global::MyCAD.Properties.Resources.ArrayIcon;
@@ -595,6 +533,19 @@
 			this.deleteBtn.Text = "Delete";
 			this.deleteBtn.Click += new System.EventHandler(this.ModifyBtn_Click);
 			// 
+			// annotateTab
+			// 
+			this.annotateTab.Name = "annotateTab";
+			this.annotateTab.Panels.Add(this.textPanel);
+			this.annotateTab.Text = "Annotate";
+			// 
+			// textPanel
+			// 
+			this.textPanel.ButtonMoreVisible = false;
+			this.textPanel.Items.Add(this.stextBtn);
+			this.textPanel.Name = "textPanel";
+			this.textPanel.Text = "";
+			// 
 			// stextBtn
 			// 
 			this.stextBtn.Image = global::MyCAD.Properties.Resources.AnnotationTextIcon;
@@ -603,6 +554,55 @@
 			this.stextBtn.SmallImage = ((System.Drawing.Image)(resources.GetObject("stextBtn.SmallImage")));
 			this.stextBtn.Text = "Single Text";
 			this.stextBtn.Click += new System.EventHandler(this.annotate_Click);
+			// 
+			// statusStrip
+			// 
+			this.statusStrip.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.statusStrip.ImageScalingSize = new System.Drawing.Size(40, 40);
+			this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.coordinate});
+			this.statusStrip.Location = new System.Drawing.Point(0, 626);
+			this.statusStrip.Name = "statusStrip";
+			this.statusStrip.Size = new System.Drawing.Size(1111, 35);
+			this.statusStrip.TabIndex = 11;
+			this.statusStrip.Text = "statusStrip1";
+			// 
+			// coordinate
+			// 
+			this.coordinate.AutoSize = false;
+			this.coordinate.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) 
+            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) 
+            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
+			this.coordinate.BorderStyle = System.Windows.Forms.Border3DStyle.SunkenOuter;
+			this.coordinate.Name = "coordinate";
+			this.coordinate.Size = new System.Drawing.Size(250, 30);
+			this.coordinate.Text = "0.000, 0.000, 0.000";
+			// 
+			// vS
+			// 
+			this.vS.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.vS.Location = new System.Drawing.Point(1094, 135);
+			this.vS.Name = "vS";
+			this.vS.Size = new System.Drawing.Size(17, 471);
+			this.vS.TabIndex = 12;
+			this.vS.Visible = false;
+			this.vS.Scroll += new System.Windows.Forms.ScrollEventHandler(this.vS_Scroll);
+			// 
+			// hS
+			// 
+			this.hS.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.hS.Location = new System.Drawing.Point(0, 609);
+			this.hS.Name = "hS";
+			this.hS.Size = new System.Drawing.Size(1091, 17);
+			this.hS.TabIndex = 13;
+			this.hS.Visible = false;
+			this.hS.Scroll += new System.Windows.Forms.ScrollEventHandler(this.hS_Scroll);
+			// 
+			// timer1
+			// 
+			this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
 			// 
 			// drawing
 			// 
@@ -638,6 +638,7 @@
 			this.Name = "GraphicsForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "MyCAD";
+			this.Load += new System.EventHandler(this.GraphicsForm_Load);
 			this.popup.ResumeLayout(false);
 			this.statusStrip.ResumeLayout(false);
 			this.statusStrip.PerformLayout();

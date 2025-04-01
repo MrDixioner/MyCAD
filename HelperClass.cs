@@ -52,5 +52,14 @@ namespace MyCAD {
 			}
 			return r;
 		}
+
+		public static int Sign(bool flg) {
+			switch (flg) {
+				case true:
+					return -1;
+				default:
+					return 1;
+			}
+		}
 	}
 }

@@ -27,7 +27,6 @@
 			this.text = new System.Windows.Forms.TextBox();
 			this.alignment = new System.Windows.Forms.ComboBox();
 			this.acceptBtn = new System.Windows.Forms.Button();
-			this.fontName = new System.Windows.Forms.TextBox();
 			this.label2 = new System.Windows.Forms.Label();
 			this.label3 = new System.Windows.Forms.Label();
 			this.height = new System.Windows.Forms.TextBox();
@@ -35,6 +34,7 @@
 			this.rotation = new System.Windows.Forms.TextBox();
 			this.label5 = new System.Windows.Forms.Label();
 			this.cancelBtn = new System.Windows.Forms.Button();
+			this.textStyle = new System.Windows.Forms.ComboBox();
 			this.SuspendLayout();
 			// 
 			// label1
@@ -73,23 +73,14 @@
 			this.acceptBtn.UseVisualStyleBackColor = true;
 			this.acceptBtn.Click += new System.EventHandler(this.acceptBtn_Click);
 			// 
-			// fontName
-			// 
-			this.fontName.Location = new System.Drawing.Point(7, 98);
-			this.fontName.Name = "fontName";
-			this.fontName.Size = new System.Drawing.Size(301, 27);
-			this.fontName.TabIndex = 1;
-			this.fontName.Text = "Calibri";
-			this.fontName.TextChanged += new System.EventHandler(this.Input_TextChange);
-			// 
 			// label2
 			// 
 			this.label2.AutoSize = true;
 			this.label2.Location = new System.Drawing.Point(7, 76);
 			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(41, 19);
+			this.label2.Size = new System.Drawing.Size(75, 19);
 			this.label2.TabIndex = 4;
-			this.label2.Text = "Font:";
+			this.label2.Text = "Text style:";
 			// 
 			// label3
 			// 
@@ -146,18 +137,27 @@
 			this.cancelBtn.UseVisualStyleBackColor = true;
 			this.cancelBtn.Click += new System.EventHandler(this.cancelBtn_Click);
 			// 
+			// textStyle
+			// 
+			this.textStyle.FormattingEnabled = true;
+			this.textStyle.Location = new System.Drawing.Point(11, 103);
+			this.textStyle.Name = "textStyle";
+			this.textStyle.Size = new System.Drawing.Size(297, 27);
+			this.textStyle.TabIndex = 10;
+			this.textStyle.SelectedIndexChanged += new System.EventHandler(this.textStyle_SelectedIndexChanged);
+			// 
 			// TextEditor
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 19F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(315, 254);
+			this.Controls.Add(this.textStyle);
 			this.Controls.Add(this.cancelBtn);
 			this.Controls.Add(this.rotation);
 			this.Controls.Add(this.label5);
 			this.Controls.Add(this.height);
 			this.Controls.Add(this.label4);
 			this.Controls.Add(this.label3);
-			this.Controls.Add(this.fontName);
 			this.Controls.Add(this.label2);
 			this.Controls.Add(this.acceptBtn);
 			this.Controls.Add(this.alignment);
@@ -183,7 +183,6 @@
 		private System.Windows.Forms.TextBox text;
 		private System.Windows.Forms.ComboBox alignment;
 		private System.Windows.Forms.Button acceptBtn;
-		private System.Windows.Forms.TextBox fontName;
 		private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.Label label3;
 		private System.Windows.Forms.TextBox height;
@@ -191,5 +190,6 @@
 		private System.Windows.Forms.TextBox rotation;
 		private System.Windows.Forms.Label label5;
 		private System.Windows.Forms.Button cancelBtn;
+		private System.Windows.Forms.ComboBox textStyle;
 	}
 }

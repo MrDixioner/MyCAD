@@ -2,26 +2,27 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Threading;
+using MyCAD.Tables;
 
 namespace MyCAD.Entities {
 	public class Text:EntityObject {
 		private Vector3 position;
 		private string text;
 		private TextAlignment alignment;
-		private string fontFamilyName;
+		private TextStyle style;
 		private double height;
 		private double rotation;
 
 		public Text(string text) : this(text, Vector3.Zero) { }
 
-		public Text(string text,Vector3 position) : this(text, position, 2.50, "Calibri") { }
+		public Text(string text,Vector3 position) : this(text, position, 2.50, TextStyle.Default) { }
 		
-		public Text(string text,Vector3 position,double height,string fontname) : base(EntityType.Text) {
+		public Text(string text,Vector3 position,double height,TextStyle style) : base(EntityType.Text) {
 			this.text = text;
 			this.position = position;
 			alignment = TextAlignment.BottomLeft;
 			this.height = height;
-			fontFamilyName = fontname;
+			this.style = style;
 			rotation = 0.0;
 		}
 
@@ -39,9 +40,9 @@ namespace MyCAD.Entities {
 			}
 		}
 
-		public string  FontFamilyName {
-			get { return fontFamilyName; }
-			set { fontFamilyName = value; }
+		public TextStyle Style {
+			get { return style; }
+			set { style = value; }
 		}
 
 		public Vector3 Position {
@@ -73,7 +74,7 @@ namespace MyCAD.Entities {
 		}
 
 		public Font Font {
-			get { return new Font(FontFamilyName, (float)height); }
+			get { return new Font(style.FontFamilyName, (float)height, style.FontStyle, GraphicsUnit.Millimeter); }
 		}
 
 		public LwPolyline Rectangle {
@@ -82,8 +83,8 @@ namespace MyCAD.Entities {
 				float rotate;
 				double x = position.X;
 				double y = position.Y;
-				float width = Size.Width;
-				float height = Size.Height;
+				float width = Size.Width * HelperClass.Sign(style.IsBackward) * (float)style.WidthFactor;
+				float height = Size.Height * HelperClass.Sign(style.IsUpsideDown);
 
 				double[] _x = { x, x - width / 2.0, x - width };
 				double[] _y = { y, y + height / 2.0, y + height };
@@ -166,7 +167,7 @@ namespace MyCAD.Entities {
 				Position = p,
 				Alignment = alignment,
 				Height = height,
-				FontFamilyName = fontFamilyName,
+				Style = style,
 				Rotation = rotation,
 				isVisible = isVisible
 			};
@@ -180,7 +181,7 @@ namespace MyCAD.Entities {
 				Position = p,
 				Alignment = alignment,
 				Height = height,
-				FontFamilyName = fontFamilyName,
+				Style = style,
 				Rotation = rotate,
 				isVisible = isVisible
 			};
@@ -194,7 +195,7 @@ namespace MyCAD.Entities {
 				Position = p,
 				Alignment = alignment,
 				Height = height,
-				FontFamilyName = fontFamilyName,
+				Style = style,
 				Rotation = rotate,
 				isVisible = isVisible
 			};
@@ -208,7 +209,7 @@ namespace MyCAD.Entities {
 				Position = AlignmentCoordinate(rect,alignment, out rotate),
 				Alignment = alignment,
 				Height = height,
-				FontFamilyName = fontFamilyName,
+				Style = style,
 				Rotation = rotate,
 				isVisible = isVisible
 			};
@@ -272,7 +273,7 @@ namespace MyCAD.Entities {
 				Position = p,
 				Alignment = alignment,
 				Height = h,
-				FontFamilyName = fontFamilyName,
+				Style = style,
 				Rotation = rotation,
 				isVisible = isVisible
 			};
@@ -283,7 +284,7 @@ namespace MyCAD.Entities {
 				Position = position,
 				Alignment = alignment,
 				Height = height,
-				FontFamilyName = fontFamilyName,
+				Style = style,
 				Rotation = rotation,
 				isVisible = isVisible
 			};

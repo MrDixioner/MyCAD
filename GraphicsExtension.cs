@@ -240,7 +240,8 @@ namespace MyCAD {
 				Vector3 p = text.Position * ScaleFactor;
 
 				g.PageUnit = GraphicsUnit.Millimeter;
-				g.ScaleTransform(ScaleFactor, ScaleFactor);
+				g.ScaleTransform(ScaleFactor * (float)text.Style.WidthFactor * HelperClass.Sign(text.Style.IsBackward),
+					ScaleFactor * HelperClass.Sign(text.Style.IsUpsideDown));
 				g.RotateTransform(rotate);
 				g.TranslateTransform((float)p.X - XScroll, Height - (float)p.Y - YScroll, System.Drawing.Drawing2D.MatrixOrder.Append);
 
