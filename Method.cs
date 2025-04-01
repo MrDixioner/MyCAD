@@ -1251,5 +1251,14 @@ namespace MyCAD.Methods {
 					break;
 			}
 		}
+
+		public static void Delete(List<EntityObject> entities) {
+			for (int i = 0; i < entities.Count; i++) {
+				if (entities[i].IsSelected) {
+					entities.RemoveAt(i);
+					i--;
+				}
+			}
+		}
 	}
 }

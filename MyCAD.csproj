@@ -244,5 +244,8 @@
   <ItemGroup>
     <None Include="Resources\AnnotationTextIcon.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DeleteIcon.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

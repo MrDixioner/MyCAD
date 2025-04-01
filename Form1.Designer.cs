@@ -35,13 +35,13 @@
 			this.modifyTab = new System.Windows.Forms.RibbonTab();
 			this.editPanel = new System.Windows.Forms.RibbonPanel();
 			this.ribbonSeparator1 = new System.Windows.Forms.RibbonSeparator();
+			this.annotateTab = new System.Windows.Forms.RibbonTab();
+			this.textPanel = new System.Windows.Forms.RibbonPanel();
 			this.statusStrip = new System.Windows.Forms.StatusStrip();
 			this.coordinate = new System.Windows.Forms.ToolStripStatusLabel();
 			this.vS = new System.Windows.Forms.VScrollBar();
 			this.hS = new System.Windows.Forms.HScrollBar();
 			this.timer1 = new System.Windows.Forms.Timer(this.components);
-			this.annotateTab = new System.Windows.Forms.RibbonTab();
-			this.textPanel = new System.Windows.Forms.RibbonPanel();
 			this.arcBtn = new System.Windows.Forms.RibbonButton();
 			this.arcBtn11 = new System.Windows.Forms.RibbonButton();
 			this.arcBtn12 = new System.Windows.Forms.RibbonButton();
@@ -76,6 +76,7 @@
 			this.scaleBtn = new System.Windows.Forms.RibbonButton();
 			this.lineararrayBtn = new System.Windows.Forms.RibbonButton();
 			this.circulararrayBtn = new System.Windows.Forms.RibbonButton();
+			this.deleteBtn = new System.Windows.Forms.RibbonButton();
 			this.stextBtn = new System.Windows.Forms.RibbonButton();
 			this.drawing = new System.Windows.Forms.PictureBox();
 			this.popup.SuspendLayout();
@@ -177,12 +178,26 @@
 			this.editPanel.Items.Add(this.ribbonSeparator1);
 			this.editPanel.Items.Add(this.lineararrayBtn);
 			this.editPanel.Items.Add(this.circulararrayBtn);
+			this.editPanel.Items.Add(this.deleteBtn);
 			this.editPanel.Name = "editPanel";
 			this.editPanel.Text = "";
 			// 
 			// ribbonSeparator1
 			// 
 			this.ribbonSeparator1.Name = "ribbonSeparator1";
+			// 
+			// annotateTab
+			// 
+			this.annotateTab.Name = "annotateTab";
+			this.annotateTab.Panels.Add(this.textPanel);
+			this.annotateTab.Text = "Annotate";
+			// 
+			// textPanel
+			// 
+			this.textPanel.ButtonMoreVisible = false;
+			this.textPanel.Items.Add(this.stextBtn);
+			this.textPanel.Name = "textPanel";
+			this.textPanel.Text = "";
 			// 
 			// statusStrip
 			// 
@@ -232,19 +247,6 @@
 			// timer1
 			// 
 			this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-			// 
-			// annotateTab
-			// 
-			this.annotateTab.Name = "annotateTab";
-			this.annotateTab.Panels.Add(this.textPanel);
-			this.annotateTab.Text = "Annotate";
-			// 
-			// textPanel
-			// 
-			this.textPanel.ButtonMoreVisible = false;
-			this.textPanel.Items.Add(this.stextBtn);
-			this.textPanel.Name = "textPanel";
-			this.textPanel.Text = "";
 			// 
 			// arcBtn
 			// 
@@ -584,6 +586,15 @@
 			this.circulararrayBtn.Text = "Circular";
 			this.circulararrayBtn.Click += new System.EventHandler(this.ModifyBtn_Click);
 			// 
+			// deleteBtn
+			// 
+			this.deleteBtn.Image = global::MyCAD.Properties.Resources.DeleteIcon;
+			this.deleteBtn.LargeImage = global::MyCAD.Properties.Resources.DeleteIcon;
+			this.deleteBtn.Name = "deleteBtn";
+			this.deleteBtn.SmallImage = ((System.Drawing.Image)(resources.GetObject("deleteBtn.SmallImage")));
+			this.deleteBtn.Text = "Delete";
+			this.deleteBtn.Click += new System.EventHandler(this.ModifyBtn_Click);
+			// 
 			// stextBtn
 			// 
 			this.stextBtn.Image = global::MyCAD.Properties.Resources.AnnotationTextIcon;
@@ -691,6 +702,7 @@
 		private System.Windows.Forms.RibbonTab annotateTab;
 		private System.Windows.Forms.RibbonPanel textPanel;
 		private System.Windows.Forms.RibbonButton stextBtn;
+		private System.Windows.Forms.RibbonButton deleteBtn;
 	}
 }
 

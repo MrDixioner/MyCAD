@@ -885,6 +885,14 @@ namespace MyCAD {
 				entity.DeSelect();
 			drawing.Refresh();
 		}
+
+		private bool IsObjectSelected() {
+			foreach (EntityObject entity in entities) {
+				if (entity.IsSelected)
+					return true;
+			}
+			return false;
+		}
 		#endregion
 
 		#region " Graphics form components event "
@@ -944,6 +952,9 @@ namespace MyCAD {
 			ActiveCursor(2, edit_cursorSize);
 			SetModifyPopup();
 
+			if (IsObjectSelected())
+				EnterBtn_Click(sender, null);
+
 		}
 
 		private ToolStripMenuItem toolitem;
@@ -986,6 +997,10 @@ namespace MyCAD {
 					activeSelection = false;
 					ActiveCursor(1, draw_cursorSize);
 					ClickNum++;
+					break;
+				case 8: // Delete object
+					Method.Delete(entities);
+					CancelAll();
 					break;
 			}			
 		}
