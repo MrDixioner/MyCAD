@@ -967,6 +967,30 @@ namespace MyCAD {
 			textStyles.Add(newstyle);
 		}
 
+		private void drawing_DoubleClick(object sender, EventArgs e) {
+			if (EntityIndex != -1) {
+				switch (entities[EntityIndex].Type) {
+					case EntityType.Text:
+						using (var textEditor=new TextEditor(this)) {
+							Text t = (Text)entities[EntityIndex].Clone();
+							tempText = entities[EntityIndex] as Text;
+
+							textEditor.Status = 1;
+							timer1.Enabled = true;
+
+							var result = textEditor.ShowDialog();
+							if (result == DialogResult.OK) {
+								entities[EntityIndex] = tempText;
+							} else {
+								entities[EntityIndex] = t;
+							}
+							CancelAll();
+						}
+						break;
+				}
+			}
+		}
+
 		private ToolStripMenuItem toolitem;
 		
 		private void SetModifyPopup() {

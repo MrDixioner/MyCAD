@@ -24,9 +24,9 @@ namespace MyCAD.EntryForms {
 		private Text text = new Text("AaBb123", 6);
 		private string name="name";
 		private int index;
+		private bool IsChanged = false;
 
-		private void TextStyleManagement_Load(object sender, EventArgs e) {
-			fontStyle.DataSource = Enum.GetValues(typeof(FontStyle));
+		private void TextStyleManagement_Load(object sender, EventArgs e) {			
 			currentStyle.Text = "Current style: " + Style.Name;
 			SetStyleList();
 		}
@@ -40,10 +40,11 @@ namespace MyCAD.EntryForms {
 		}
 
 		private void styles_SelectedIndexChanged(object sender, EventArgs e) {
+			CheckIsChanged(sender);
 			index = bs.Position;
 			Style = (TextStyle)styles.Items[styles.SelectedIndex];
 			name = Style.Name;
-			fontFamily.SelectedIndex = (int)Style.FontStyle;
+			fontStyle.SelectedIndex = (int)Style.FontStyle;
 			if (fontFamily.Items.IndexOf(Style.FontFamilyName) != -1)
 				fontFamily.SelectedIndex = fontFamily.Items.IndexOf(Style.FontFamilyName);
 			height.Text = Style.Height.ToString();
@@ -51,6 +52,7 @@ namespace MyCAD.EntryForms {
 			upsideDown.Checked = Style.IsUpsideDown;
 			backward.Checked = Style.IsBackward;
 			deleteBtn.Enabled = !Style.IsReserved;
+			IsChanged = false;
 			SetSampleText();
 		}
 
@@ -62,6 +64,7 @@ namespace MyCAD.EntryForms {
 		private void fontFamily_SelectedIndexChanged(object sender, EventArgs e) {
 			if (fontFamily.SelectedIndex != -1)
 				SetSampleText();
+			IsChanged = true;
 		}
 
 		private void SetSampleText() {
@@ -84,30 +87,46 @@ namespace MyCAD.EntryForms {
 			picBox.Refresh();
 		}
 
+		private void CheckIsChanged(object sender) {
+			if (IsChanged) {
+				if (MessageBox.Show("Do you want to save the changes?", "Question", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) {
+					saveBtn_Click(sender, null);
+				}
+			}
+		}
+
 		private void fontStyle_SelectedIndexChanged(object sender, EventArgs e) {
-			if (fontStyle.SelectedIndex != -1)
+			if (fontStyle.SelectedIndex != -1) {
 				SetSampleText();
+				IsChanged = true;
+			}
 		}
 
 		private void widthFactor_TextChanged(object sender, EventArgs e) {
-			if (!string.IsNullOrEmpty(widthFactor.Text))
+			if (!string.IsNullOrEmpty(widthFactor.Text)){
 				SetSampleText();
+				IsChanged = true;
+			}
 		}
 
 		private void upsideDown_CheckedChanged(object sender, EventArgs e) {
 			SetSampleText();
+			IsChanged = true;
 		}
 
 		private void backward_CheckedChanged(object sender, EventArgs e) {
 			SetSampleText();
+			IsChanged = true;
 		}
 
 		private void setcurrentBtn_Click(object sender, EventArgs e) {
+			CheckIsChanged(sender);
 			graphicsForm.currentStyle = Style;
 			currentStyle.Text = "Current style: " + Style.Name;
 		}
 
 		private void newBtn_Click(object sender, EventArgs e) {
+			CheckIsChanged(sender);
 			using (var newstylefrm=new SetStyleNameForm()) {
 				var result = newstylefrm.ShowDialog();
 				if (result == DialogResult.OK) {
@@ -140,20 +159,49 @@ namespace MyCAD.EntryForms {
 		}
 
 		private void saveBtn_Click(object sender, EventArgs e) {
-			if (fontFamily.SelectedIndex != -1)
+			if (fontFamily.SelectedIndex != -1)	{
 				Style.FontFamilyName = fontFamily.Text;
-			if (fontStyle.SelectedIndex != -1)
+			} else {
+				MessageBox.Show("Font name cannot be empty","Information",MessageBoxButtons.OK,MessageBoxIcon.Information);
+				fontFamily.Focus();
+				return;
+			}
+
+			if (fontStyle.SelectedIndex != -1) {
 				Style.FontStyle = (FontStyle)fontStyle.SelectedIndex;
-			if (!string.IsNullOrEmpty(height.Text))
+			} else {
+				MessageBox.Show("Font name cannot be empty", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+				fontStyle.Focus();
+				return;
+			}
+
+			if (!string.IsNullOrEmpty(height.Text) && height.ToDouble >= 0) {
 				Style.Height = double.Parse(height.Text);
-			if (!string.IsNullOrEmpty(widthFactor.Text))
+			} else {
+				MessageBox.Show("The height cannot be empty or less than zero", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+				height.Focus();
+				return;
+			}
+
+			if (!string.IsNullOrEmpty(widthFactor.Text) && (widthFactor.ToDouble > 0.01 && widthFactor.ToDouble < 100)){
 				Style.WidthFactor = double.Parse(widthFactor.Text);
-			Style.IsUpsideDown = upsideDown.Checked;
+			} else {
+				MessageBox.Show("The width factor cannot be empty or smaller than 0.01 and larger than 100", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+				widthFactor.Focus();
+				return;
+			}
+				Style.IsUpsideDown = upsideDown.Checked;
 			Style.IsBackward = backward.Checked;
+			IsChanged = false;
 		}
 
 		private void closeBtn_Click(object sender, EventArgs e) {
+			CheckIsChanged(sender);
 			Close();
-		}		
+		}
+
+		private void height_TextChanged(object sender, EventArgs e) {
+			IsChanged = true;
+		}
 	}
 }

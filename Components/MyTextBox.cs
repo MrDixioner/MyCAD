@@ -23,7 +23,11 @@ namespace MyCAD.Components {
 			get {
 				var nf = new System.Globalization.NumberFormatInfo();
 				nf.NegativeSign = "-";
+				try {
 				return double.Parse(Text, nf);
+				} catch {
+					return 0;
+				}
 			}
 		}
 

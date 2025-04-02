@@ -100,7 +100,7 @@ namespace MyCAD.Entities {
 
 				LwPolyline result = new LwPolyline(vertexes, true);
 
-				rotate = (float)Math.Abs(rotation % 360);
+				rotate = (float)(rotation % 360);
 
 				return result.Rotate2D(position, rotate) as LwPolyline;
 			}
