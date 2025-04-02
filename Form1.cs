@@ -961,9 +961,6 @@ namespace MyCAD {
 
 		private void GraphicsForm_Load(object sender, EventArgs e) {
 			currentStyle = Tables.TextStyle.Default;
-			currentStyle.WidthFactor = 1.5;
-			currentStyle.IsBackward = true;
-			currentStyle.IsUpsideDown = true;
 			Tables.TextStyle newstyle = new Tables.TextStyle("impact");
 			textStyles.Add(currentStyle);
 			textStyles.Add(newstyle);

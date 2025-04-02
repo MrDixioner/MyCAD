@@ -49,15 +49,19 @@ namespace MyCAD.EntryForms {
 
 		private void Input_TextChange(object sender,EventArgs e) {
 			graphicsForm.tempText = new Entities.Text(text.Text, Position);
-			graphicsForm.tempText.Alignment = (Entities.TextAlignment)alignment.SelectedIndex;
-			graphicsForm.tempText.Height = double.Parse(height.Text);
-			graphicsForm.tempText.Rotation = double.Parse(rotation.Text);
-			graphicsForm.tempText.Style = graphicsForm.textStyles[textStyle.SelectedIndex];
+			if (alignment.SelectedIndex != -1)
+				graphicsForm.tempText.Alignment = (Entities.TextAlignment)alignment.SelectedIndex;
+			if (!string.IsNullOrEmpty(height.Text))
+				graphicsForm.tempText.Height = double.Parse(height.Text);
+			if (!string.IsNullOrEmpty(height.Text))
+				graphicsForm.tempText.Rotation = double.Parse(rotation.Text);
+			if (textStyle.SelectedIndex != -1)
+				graphicsForm.tempText.Style = graphicsForm.textStyles[textStyle.SelectedIndex];
 		}
 
 		private void textStyle_SelectedIndexChanged(object sender, EventArgs e) {
-			if (textStyle.SelectedIndex != -1) {				
-				if (string.IsNullOrEmpty(height.Text)||double.Parse(height.Text)==0.0)
+			if (textStyle.SelectedIndex != -1) {
+				if (string.IsNullOrEmpty(height.Text) || double.Parse(height.Text) == 0.0)
 					height.Text = graphicsForm.textStyles[textStyle.SelectedIndex].Height.ToString();
 			}
 		}
