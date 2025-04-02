@@ -1260,5 +1260,23 @@ namespace MyCAD.Methods {
 				}
 			}
 		}
+
+		public static void CheckTextStyle(List<EntityObject> entities,List<Tables.TextStyle> styles) {
+			foreach (Tables.TextStyle ts in styles) {
+				if (ts.Name != "Standard") {
+					bool flg = false;
+					for (int i = 0; i < entities.Count; i++) {
+						if (entities[i] is Text) {
+							Text text = entities[i] as Text;
+							if (text.Style.Name == ts.Name) {
+								flg = true;
+								break;
+							}
+						}
+					}
+					ts.IsReserved = flg;
+				}
+			}
+		}
 	}
 }

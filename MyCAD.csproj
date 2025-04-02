@@ -114,11 +114,23 @@
     <Compile Include="EntryForms\SetPolygonValuesForm.Designer.cs">
       <DependentUpon>SetPolygonValuesForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="EntryForms\SetStyleNameForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EntryForms\SetStyleNameForm.Designer.cs">
+      <DependentUpon>SetStyleNameForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="EntryForms\TextEditor.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="EntryForms\TextEditor.Designer.cs">
       <DependentUpon>TextEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EntryForms\TextStyleManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EntryForms\TextStyleManagement.Designer.cs">
+      <DependentUpon>TextStyleManagement.cs</DependentUpon>
     </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -153,8 +165,14 @@
     <EmbeddedResource Include="EntryForms\SetPolygonValuesForm.resx">
       <DependentUpon>SetPolygonValuesForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="EntryForms\SetStyleNameForm.resx">
+      <DependentUpon>SetStyleNameForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="EntryForms\TextEditor.resx">
       <DependentUpon>TextEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EntryForms\TextStyleManagement.resx">
+      <DependentUpon>TextStyleManagement.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
@@ -260,6 +278,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\DeleteIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TextStyle.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

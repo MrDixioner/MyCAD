@@ -14,6 +14,7 @@ namespace MyCAD.Entities {
 		private double rotation;
 
 		public Text(string text) : this(text, Vector3.Zero) { }
+		public Text(string name,double height) : this(name, Vector3.Zero, height, TextStyle.Default) { }
 
 		public Text(string text,Vector3 position) : this(text, position, 2.50, TextStyle.Default) { }
 		

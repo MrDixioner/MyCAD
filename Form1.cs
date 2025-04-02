@@ -282,6 +282,7 @@ namespace MyCAD {
 									var result = texteditor.ShowDialog();
 
 									if (result == DialogResult.OK) {
+										tempText.Style.IsReserved = true;
 										entities.Add(tempText);
 									}
 									CancelAll();
@@ -1009,6 +1010,7 @@ namespace MyCAD {
 					break;
 				case 8: // Delete object
 					Method.Delete(entities);
+					Method.CheckTextStyle(entities, textStyles);
 					CancelAll();
 					break;
 			}			
@@ -1026,9 +1028,21 @@ namespace MyCAD {
 
 		private void annotate_Click(object sender,EventArgs e) {
 			var item = sender as RibbonButton;
-			AnnotateIndex = textPanel.Items.IndexOf(item);
-			activeDrawing = true;
-			ActiveCursor(1, draw_cursorSize);
+			AnnotateIndex = textPanel.Items.IndexOf(item);			
+
+			switch (AnnotateIndex) {
+				case 0: // Draw text
+					activeDrawing = true;
+					ActiveCursor(1, draw_cursorSize);
+					break;
+				case 1: // TextStyle management
+					using (var styleManagement = new TextStyleManagement(this)) {
+						styleManagement.TextStyles = textStyles;
+						styleManagement.Style = currentStyle;
+						var result = styleManagement.ShowDialog();
+					}
+					break;
+			}
 		}
 
 		private void LwPolylineCloseStatus(int index) {

@@ -61,5 +61,17 @@ namespace MyCAD {
 					return 1;
 			}
 		}
+
+		private static float DPI() {
+			System.Drawing.Bitmap bmp = new System.Drawing.Bitmap(1, 1);
+			using(var g = System.Drawing.Graphics.FromImage(bmp)) {
+				return g.DpiX;
+			}
+		}
+		
+		// Convert pixels to millimeters
+		public static float PixelToMillimeters(float pixel) {
+			return pixel * 25.4f / DPI();
+		}
 	}
 }

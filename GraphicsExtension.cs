@@ -234,7 +234,7 @@ namespace MyCAD {
 			try {
 				SolidBrush brush = new SolidBrush(pen.Color);
 				SolidBrush brush1 = new SolidBrush(extpen.Color);
-				g.DrawLwPolyline(new Pen(Color.Red, 0), text.Rectangle);
+				//g.DrawLwPolyline(new Pen(Color.Red, 0), text.Rectangle);
 
 				float rotate = -(float)Math.Abs(text.Rotation % 360);
 				Vector3 p = text.Position * ScaleFactor;
