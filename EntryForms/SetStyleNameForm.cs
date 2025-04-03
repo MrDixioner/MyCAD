@@ -22,5 +22,9 @@ namespace MyCAD.EntryForms {
 		private void cancelBtn_Click(object sender, EventArgs e) {
 			Close();
 		}
+
+		private void SetStyleNameForm_Load(object sender, EventArgs e) {
+			name.Text = StyleName;
+		}
 	}
 }

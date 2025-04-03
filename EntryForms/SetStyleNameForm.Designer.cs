@@ -33,7 +33,7 @@
 			// 
 			this.name.EnterAsTab = true;
 			this.name.Location = new System.Drawing.Point(68, 9);
-			this.name.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.name.Margin = new System.Windows.Forms.Padding(4);
 			this.name.Name = "name";
 			this.name.Size = new System.Drawing.Size(229, 27);
 			this.name.TabIndex = 0;
@@ -82,12 +82,13 @@
 			this.Controls.Add(this.name);
 			this.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-			this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.Margin = new System.Windows.Forms.Padding(4);
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
 			this.Name = "SetStyleNameForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 			this.Text = "SetStyleNameForm";
+			this.Load += new System.EventHandler(this.SetStyleNameForm_Load);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 

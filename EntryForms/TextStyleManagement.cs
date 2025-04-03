@@ -24,9 +24,11 @@ namespace MyCAD.EntryForms {
 		private Text text = new Text("AaBb123", 6);
 		private string name="name";
 		private int index;
-		private bool IsChanged = false;
+		private bool IsChanged;
 
-		private void TextStyleManagement_Load(object sender, EventArgs e) {			
+		private void TextStyleManagement_Load(object sender, EventArgs e) {
+			fontStyle.DataSource = Enum.GetValues(typeof(FontStyle));
+			IsChanged = false;
 			currentStyle.Text = "Current style: " + Style.Name;
 			SetStyleList();
 		}
@@ -51,7 +53,7 @@ namespace MyCAD.EntryForms {
 			widthFactor.Text = Style.WidthFactor.ToString();
 			upsideDown.Checked = Style.IsUpsideDown;
 			backward.Checked = Style.IsBackward;
-			deleteBtn.Enabled = !Style.IsReserved;
+			editBtn.Enabled = !Style.IsReserved;
 			IsChanged = false;
 			SetSampleText();
 		}
@@ -150,11 +152,17 @@ namespace MyCAD.EntryForms {
 		}
 
 		private void deleteBtn_Click(object sender, EventArgs e) {
-			if (MessageBox.Show("Do you want to delete this style", "Question", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) {
-				if (styles.SelectedIndex != -1) {
-					graphicsForm.textStyles.RemoveAt(styles.SelectedIndex);
-					SetStyleList();
+			CheckIsChanged(sender);
+			if (!Style.IsReserved && !IsStyleExist() && !Style.Name.Equals(graphicsForm.currentStyle.Name)) {
+				if (MessageBox.Show("Do you want to delete this style", "Question", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) {
+					if (styles.SelectedIndex != -1) {
+						graphicsForm.textStyles.RemoveAt(styles.SelectedIndex);
+						SetStyleList();
+					}
+					MessageBox.Show("Style removed", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
 				}
+			} else {
+				MessageBox.Show("This style is reserved or ised and cannot be deleted", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
 			}
 		}
 
@@ -202,6 +210,33 @@ namespace MyCAD.EntryForms {
 
 		private void height_TextChanged(object sender, EventArgs e) {
 			IsChanged = true;
+		}
+
+		private void editBtn_Click(object sender, EventArgs e) {
+			using (var editform=new SetStyleNameForm()) {
+				editform.StyleName = Style.Name;
+				var result = editform.ShowDialog();
+
+				if (result == DialogResult.OK) {
+					Style.Name = editform.StyleName;
+					if (Style.Name.Equals(graphicsForm.currentStyle.Name))
+						currentStyle.Text = "Current style: " + Style.Name;
+					SetStyleList();
+				}
+			}
+		}
+
+		private bool IsStyleExist() {
+			if (Style.IsReserved)
+				return false;
+			for (int i = 0; i < graphicsForm.entities.Count; i++) {
+				if (graphicsForm.entities[i] is Text) {
+					Text txt = graphicsForm.entities[i] as Text;
+					if (txt.Style.Name.ToLower()==Style.Name.ToLower())
+							return true;
+				}
+			}
+			return false;
 		}
 	}
 }

@@ -499,7 +499,7 @@ namespace MyCAD.Methods {
 		}
 		#endregion
 
-		#region --- Get ---
+		#region --- Get functions ---
 		public static Arc GetArcWith3Points(Vector3 p1,Vector3 p2,Vector3 p3) {
 			double start, end;
 			Arc result = new Arc();
@@ -1259,24 +1259,6 @@ namespace MyCAD.Methods {
 					i--;
 				}
 			}
-		}
-
-		public static void CheckTextStyle(List<EntityObject> entities,List<Tables.TextStyle> styles) {
-			foreach (Tables.TextStyle ts in styles) {
-				if (ts.Name != "Standard") {
-					bool flg = false;
-					for (int i = 0; i < entities.Count; i++) {
-						if (entities[i] is Text) {
-							Text text = entities[i] as Text;
-							if (text.Style.Name == ts.Name) {
-								flg = true;
-								break;
-							}
-						}
-					}
-					ts.IsReserved = flg;
-				}
-			}
-		}
+		}		
 	}
 }

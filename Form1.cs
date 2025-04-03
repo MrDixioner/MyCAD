@@ -13,7 +13,7 @@ namespace MyCAD {
 		}
 
 		#region " Variables "		
-		private List<EntityObject> entities = new List<EntityObject>();
+		public List<EntityObject> entities = new List<EntityObject>();
 		private List<Ellipse> tempEllipse=new List<Ellipse>();
 		private LwPolyline tempPolyline = new LwPolyline();
 		// All vectors
@@ -282,7 +282,6 @@ namespace MyCAD {
 									var result = texteditor.ShowDialog();
 
 									if (result == DialogResult.OK) {
-										tempText.Style.IsReserved = true;
 										entities.Add(tempText);
 									}
 									CancelAll();
@@ -1034,7 +1033,6 @@ namespace MyCAD {
 					break;
 				case 8: // Delete object
 					Method.Delete(entities);
-					Method.CheckTextStyle(entities, textStyles);
 					CancelAll();
 					break;
 			}			
