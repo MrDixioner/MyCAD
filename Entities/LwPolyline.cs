@@ -342,6 +342,45 @@ namespace MyCAD.Entities {
 			return polylines;
 		}
 
+		public override object Offset(Vector3 insertPoint, double offsetValue) {
+			List<LwPolylineVertex> vertex = new List<LwPolylineVertex>();
+			List<Line> lines = new List<Line>();
+			bool flg = HelperClass.DeterminePointOfPolyline(this, insertPoint);
+			double angle;
+
+			for (int i = 0; i < vertexes.Count; i++) {
+				int next = (i == 0) ? vertexes.Count - 1 : i - 1;
+				Line l1=new Line(vertexes[i].Position, vertexes[next].Position);
+				angle = l1.Angle;
+				angle = flg ? angle + 90 : angle - 90;
+				Vector3 start = l1.StartPoint.Transfer2D(offsetValue, angle);
+				Vector3 end = l1.EndPoint.Transfer2D(offsetValue, angle);
+				lines.Add(new Line(start, end));
+			}
+
+			for (int j = 0; j < lines.Count; j++) {
+				int next = (j == vertexes.Count - 1) ? 0 : j + 1;
+				Vector3 intersection = Method.LineLineIntersection(lines[j], lines[next], true);
+				Vector2 v = intersection.ToVector2;
+
+				vertex.Add(new LwPolylineVertex(v, vertexes[j].Bulge));
+			}
+
+			if (!IsClosed) {
+				vertex[0].Position = lines[1].EndPoint.ToVector2;
+				vertex[lines.Count - 1].Position = lines[lines.Count - 1].StartPoint.ToVector2;
+
+			}
+
+			return new LwPolyline {
+				Vertexes = vertex,
+				Flags = flags,
+				Thickness = thickness,
+				IsClosed = IsClosed,
+				IsVisible = isVisible
+			};
+		}
+
 		public override object Clone() {
 			List<LwPolylineVertex> vertexs_copy = new List<LwPolylineVertex>();
 			foreach (LwPolylineVertex vertex in vertexes)

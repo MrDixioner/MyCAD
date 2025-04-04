@@ -68,7 +68,7 @@ namespace MyCAD.Entities {
 			List<Vector3> result = new List<Vector3>();
 			for (int i = 0; i < 360; i += 90) {
 				Vector3 v = center.Transfer2D(radius, i);
-				if (Methods.Method.IsPointOnArc(this, v))
+				if (Method.IsPointOnArc(this, v))
 					result.Add(v);
 			}
 			return result;
@@ -96,7 +96,7 @@ namespace MyCAD.Entities {
 				Vector3 start = new Vector3(x1, y1);
 				Vector3 end = new Vector3(x2, y2);
 
-				return Methods.Method.PointToRect(start, end, out direction);
+				return Method.PointToRect(start, end, out direction);
 			}
 		}
 
@@ -231,6 +231,22 @@ namespace MyCAD.Entities {
 				arc = arcs[i];
 			}
 			return arcs;
+		}
+
+		public override object Offset(Vector3 insertPoint, double offsetValue) {
+			bool flg = HelperClass.DeterminePointOfArc(this, insertPoint);
+			double r = (flg) ? radius - offsetValue : radius + offsetValue;
+
+			if (r > 0) {
+				return new Arc {
+					Center = center,
+					Radius = r,
+					StartAngle = startAngle,
+					EndAngle = endAngle,
+					IsVisible = isVisible
+				};
+			} else
+				return null;
 		}
 
 		public override object Clone() {

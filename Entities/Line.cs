@@ -9,6 +9,8 @@ namespace MyCAD.Entities {
 
 		public Line():this(Vector3.Zero, Vector3.Zero) { }
 
+		public Line(Vector2 start,Vector2 end) : this(start.ToVector3, end.ToVector3) { }
+
 		public Line(Vector3 start, Vector3 end):base(EntityType.Line) {
 			StartPoint=start;
 			EndPoint=end;
@@ -62,17 +64,7 @@ namespace MyCAD.Entities {
 			double t = (m2 - m1) / (1 + m1 * m2);
 
 			return Math.Atan(t) * 180 / Math.PI;
-		}
-
-		public override object Clone() {
-			return new Line {
-				StartPoint = startPoint,
-				EndPoint = endPoint,
-				Thickness = thickness,
-				// EntityObject properties
-				IsVisible = isVisible
-			};
-		}
+		}		
 
 		public override object CopyOrMove(Vector3 fromPoint, Vector3 toPoint) {
 			Vector3 startpoint = startPoint.CopyOrMove(fromPoint, toPoint);
@@ -175,6 +167,28 @@ namespace MyCAD.Entities {
 				line = lines[i];
 			}
 			return lines;
-		}		
+		}
+
+		public override object Offset(Vector3 insertPoint, double offsetValue) {
+			double d = HelperClass.DeterminePointOfLine(this, insertPoint);
+			double angle = (d < 0) ? Angle + 90 : (d > 0) ? Angle - 90 : Angle;
+
+			return new Line {
+				StartPoint=startPoint.Transfer2D(offsetValue,angle),
+				EndPoint=endPoint.Transfer2D(offsetValue,angle),
+				IsVisible=isVisible,
+				Thickness=thickness
+			};
+		}
+
+		public override object Clone() {
+			return new Line {
+				StartPoint = startPoint,
+				EndPoint = endPoint,
+				Thickness = thickness,
+				// EntityObject properties
+				IsVisible = isVisible
+			};
+		}
 	}
 }

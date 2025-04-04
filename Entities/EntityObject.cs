@@ -50,6 +50,7 @@ namespace MyCAD.Entities {
 			double verticalDistance,
 			int direction);
 		public abstract object CircularArray2D(Vector3 basePoint, double fillAngle, int items, bool isRotatedItems);
+		public abstract object Offset(Vector3 insertPoint, double offsetValue);
 		public abstract object Clone();
 	}    
 }

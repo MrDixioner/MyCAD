@@ -108,6 +108,10 @@
 			return points; ;
 		}
 
+		public override object Offset(Vector3 insertPoint, double offsetValue) {
+			return null;
+		}
+
 		public override object Clone() {
 			return new Point {
 				Position=position,

@@ -1,5 +1,5 @@
 ﻿using MyCAD.Entities;
-using MyCAD.Methods;
+//using MyCAD.Methods;
 using MyCAD.EntryForms;
 using System;
 using System.Collections.Generic;
@@ -31,9 +31,12 @@ namespace MyCAD {
 		private int ModifyIndex = -1;
 		private int EntityIndex = -1;
 		private int AnnotateIndex = -1;
+		private int LastIndex = -1;
 		private int ClickNum = 1;
 		private int ClickZoom = 1;
 		private int cursorIndex = 0;
+		private int left_counter = 1;
+		private int right_counter = 1;
 		public int direction;
 		private int sidesQty = 5;
 		private int inscribed = 0; // Внешний или внутренний диаметр полигона
@@ -52,6 +55,8 @@ namespace MyCAD {
 		private bool activeModify = false;
 		private bool activeSelection = true;
 		private bool selectWindow = false;
+		private bool multiple = false;
+		private bool offset_direction = false;
 		// Base size of Drawing
 		private SizeF drawingSize = new SizeF(297, 210);
 		public string Value1 = "0", Value2 = "0", Value3 = "0", Value4 = "0";
@@ -60,6 +65,7 @@ namespace MyCAD {
 		public Text tempText;
 		public List<Tables.TextStyle> textStyles = new List<Tables.TextStyle>();
 		public Tables.TextStyle currentStyle;
+		private double offsetValue = 0;
 		#endregion
 
 		#region " PictureBox events "
@@ -95,10 +101,18 @@ namespace MyCAD {
 							break;
 					}
 				} else if (!activeDrawing && activeSelection) {
-					if (EntityIndex == -1)
-						selectWindow = true;
-					else
+					if (EntityIndex == -1) {
+						if (ModifyIndex != 2)
+							selectWindow = true;
+					} else {
 						entities[EntityIndex].Select();
+						LastIndex = EntityIndex;
+						if (ModifyIndex == 2) {
+							activeSelection = false;
+							ActiveCursor(1, draw_cursorSize);
+							ClickNum++;
+						}
+					}
 
 					if (selectWindow) {
 						if (activeModify)
@@ -302,12 +316,29 @@ namespace MyCAD {
 											Method.Modify1Selection(ModifyIndex, entities, p1, currentPosition);
 											break;
 										case 1: // Move object
-										case 2: // Rotate object
-										case 4: // Scale
+										case 3: // Rotate object
+										case 5: // Scale
 											Method.Modify1Selection(ModifyIndex, entities, p1, currentPosition);
 											CancelAll();
-											break;									
-										case 3: // Mirror object
+											break;
+										case 2: // Offset
+											if (multiple) {
+												if (offset_direction) {
+													Method.Offset(entities, currentPosition, offsetValue * left_counter);
+													left_counter++;
+												} else {
+													Method.Offset(entities, currentPosition, offsetValue * right_counter);
+													right_counter++;
+												}
+											} else {
+												Method.Offset(entities, currentPosition, offsetValue);
+												ClickNum = 1;
+												ActiveCursor(2, edit_cursorSize);
+												entities[LastIndex].DeSelect();
+												activeSelection = true;
+											}
+												break;
+										case 4: // Mirror object
 											if (MessageBox.Show("Удалить исходный объект?", "Mirror",
 												MessageBoxButtons.YesNo,
 												MessageBoxIcon.Question) == DialogResult.Yes) { 
@@ -317,7 +348,7 @@ namespace MyCAD {
 											}
 											CancelAll();
 											break;
-										case 7: // Circular array
+										case 8: // Circular array
 											p1 = currentPosition;
 											using (var inputarray=new InputCircularArray(this)) {
 												timer1.Enabled = true;
@@ -605,16 +636,26 @@ namespace MyCAD {
 				switch (ModifyIndex) {
 					case 0: // Copy
 					case 1: // Move
-					case 2: // Rotate
-					case 3: // Mirror
-					case 4: // Scale
+					case 3: // Rotate
+					case 4: // Mirror
+					case 5: // Scale
 						switch (ClickNum) {
 							case 2:
 								e.Graphics.ExtendedOfModify(extpen, ModifyIndex, entities, p1, currentPosition);
 								break;
 						}
 						break;
-					case 6: // Linear array
+					case 2: // Offset
+						switch (ClickNum) {
+							case 2:
+								if (offset_direction)
+									e.Graphics.DrawExtendedOffset(pen, entities, currentPosition, offsetValue * left_counter, out offset_direction);
+								else
+									e.Graphics.DrawExtendedOffset(pen, entities, currentPosition, offsetValue * right_counter, out offset_direction);
+								break;
+						}
+						break;
+					case 7: // Linear array
 						e.Graphics.DrawExtendedOfLinearArray2D(extpen, entities,
 							int.Parse(Value1),
 							int.Parse(Value2),
@@ -622,7 +663,7 @@ namespace MyCAD {
 							double.Parse(Value4),
 							direction);
 						break;
-					case 7: // Circular array
+					case 8: // Circular array
 						e.Graphics.DrawExtendedOfCircularArray2D(extpen, entities,
 							p1,
 							double.Parse(Value2),
@@ -753,6 +794,7 @@ namespace MyCAD {
 		private void CancelAll(int index=1) {
 			DrawIndex = -1;
 			AnnotateIndex = -1;
+			ModifyIndex = -1;
 			tempText = new Text("");
 			activeDrawing = false;
 			activeSelection = true;
@@ -763,6 +805,8 @@ namespace MyCAD {
 			tempEllipse.Clear();
 			DeSelectAll();
 			timer1.Enabled = false;
+			left_counter = 1;
+			right_counter = 1;
 		}
 		
 		private void cancelBtn_Click(object sender, EventArgs e) {
@@ -957,6 +1001,21 @@ namespace MyCAD {
 			if (IsObjectSelected())
 				EnterBtn_Click(sender, null);
 
+			switch (ModifyIndex) {
+				case 2: // Offset
+					using (var setoffset=new SetOffsetValue()) {
+						setoffset.OffsetValue = offsetValue;
+						var result = setoffset.ShowDialog();
+
+						if (result == DialogResult.OK) {
+							offsetValue = setoffset.OffsetValue;
+							multiple = setoffset.Multiple;
+						} else
+							CancelAll();
+					}
+					break;
+			}
+
 		}
 
 		private void GraphicsForm_Load(object sender, EventArgs e) {
@@ -1008,13 +1067,13 @@ namespace MyCAD {
 			switch (ModifyIndex) {
 				case 0: // Copy
 				case 1: // Move
-				case 2: // Rotate
-				case 3: // Mirror
-				case 4: // Scale
+				case 3: // Rotate
+				case 4: // Mirror
+				case 5: // Scale
 					activeSelection = false;
 					ActiveCursor(1, draw_cursorSize);
 					break;
-				case 6: // Linear array
+				case 7: // Linear array
 					timer1.Enabled = true;
 					using (var inputarray=new InputLinearArray(this)) {
 						var result = inputarray.ShowDialog();
@@ -1026,12 +1085,12 @@ namespace MyCAD {
 							CancelAll();
 					}
 					break;
-				case 7: // Circular array
+				case 8: // Circular array
 					activeSelection = false;
 					ActiveCursor(1, draw_cursorSize);
 					ClickNum++;
 					break;
-				case 8: // Delete object
+				case 9: // Delete object
 					Method.Delete(entities);
 					CancelAll();
 					break;

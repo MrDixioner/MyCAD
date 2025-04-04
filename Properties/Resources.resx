@@ -130,11 +130,17 @@
   <data name="EllipseSetIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\EllipseSetIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="CircleSetIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\CircleSetIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="TextStyle" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\TextStyle.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ScaleIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ScaleIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="RectSetIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\RectSetIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ArrayDirIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ArrayDirIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="PointIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\PointIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -145,29 +151,26 @@
   <data name="PolygonSetIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\PolygonSetIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="LineSetIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\LineSetIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="AnnotationTextIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AnnotationTextIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ZoomIn" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ZoomIn.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="CircleSetIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CircleSetIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="MoveIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\MoveIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ScaleIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ScaleIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="ZoomIn1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ZoomIn1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ArcSetIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ArcSetIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ArrayDirIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ArrayDirIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="MoveIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MoveIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="MirrorIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\MirrorIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ZoomIn1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ZoomIn1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="ZoomIn" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ZoomIn.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="PolylineIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\PolylineIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -175,13 +178,13 @@
   <data name="DeleteIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\DeleteIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="AnnotationTextIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\AnnotationTextIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="LineSetIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LineSetIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ZoomOut" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ZoomOut.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="TextStyle" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\TextStyle.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="OffsetIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\OffsetIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

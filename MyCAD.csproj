@@ -108,6 +108,12 @@
     <Compile Include="EntryForms\InputLinearArray.Designer.cs">
       <DependentUpon>InputLinearArray.cs</DependentUpon>
     </Compile>
+    <Compile Include="EntryForms\SetOffsetValue.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EntryForms\SetOffsetValue.Designer.cs">
+      <DependentUpon>SetOffsetValue.cs</DependentUpon>
+    </Compile>
     <Compile Include="EntryForms\SetPolygonValuesForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -161,6 +167,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="EntryForms\InputLinearArray.resx">
       <DependentUpon>InputLinearArray.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EntryForms\SetOffsetValue.resx">
+      <DependentUpon>SetOffsetValue.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EntryForms\SetPolygonValuesForm.resx">
       <DependentUpon>SetPolygonValuesForm.cs</DependentUpon>
@@ -281,6 +290,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\TextStyle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\OffsetIcon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

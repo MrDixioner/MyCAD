@@ -182,7 +182,7 @@ namespace MyCAD.Entities {
 				int direction;
 
 				foreach (Vector3 v in BoundingPoints()) {
-					if (Methods.Method.IsPointOnEllipse(this, v))
+					if (Method.IsPointOnEllipse(this, v))
 						pointlist.Add(v);
 				}
 
@@ -201,7 +201,7 @@ namespace MyCAD.Entities {
 				Vector3 start = new Vector3(x1, y1);
 				Vector3 end = new Vector3(x2, y2);
 
-				return Methods.Method.PointToRect(start, end, out direction);
+				return Method.PointToRect(start, end, out direction);
 			}
 		}
 
@@ -351,6 +351,32 @@ namespace MyCAD.Entities {
 				ellipse = ellipses[i];
 			}
 			return ellipses;
+		}
+
+		public override object Offset(Vector3 insertPoint, double offsetValue) {
+			bool flg=HelperClass.DeterminePointOfEllipse(this,insertPoint);
+			double axis1, axis2;
+
+			if (flg) {
+				axis1 = majorAxis + offsetValue;
+				axis2 = minorAxis + offsetValue;
+			} else {
+				axis1 = majorAxis - offsetValue;
+				axis2 = minorAxis - offsetValue;
+			}
+
+			if (axis1 > 0 && axis2 > 0) {
+				return new Ellipse {
+					Center = center,
+					MajorAxis = axis1,
+					MinorAxis = axis2,
+					Rotation = rotation,
+					StartAngle = startAngle,
+					EndAngle = endAngle,
+					IsVisible = isVisible
+				};
+			} else
+				return null;
 		}
 
 		public override object Clone() {

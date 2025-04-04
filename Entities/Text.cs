@@ -280,6 +280,10 @@ namespace MyCAD.Entities {
 			};
 		}
 
+		public override object Offset(Vector3 insertPoint, double offsetValue) {
+			return null;
+		}
+
 		public override object Clone() {
 			return new Text(text) {
 				Position = position,

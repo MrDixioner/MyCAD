@@ -5,7 +5,7 @@ using System.Drawing;
 using System.Linq;
 using System.Security.Cryptography;
 
-namespace MyCAD.Methods {
+namespace MyCAD {
 	public static class Method {
 		public static double LineAngle(Vector3 start, Vector3 end) {
 			double angle = Math.Atan2((end.Y - start.Y), (end.X - start.X)) * 180.0 / Math.PI;
@@ -482,6 +482,23 @@ namespace MyCAD.Methods {
 			return result;
 		}
 
+		public static bool IsPointInsidePie(Arc pie,Vector3 point) {
+			double length = pie.Center.DistanceFrom(point);
+			double angle = pie.Center.AngleWith(point);
+			double start = pie.StartAngle;
+			double end = (pie.EndAngle + pie.StartAngle) % 360;
+
+			if (HelperClass.IsEqual(pie.Radius, length) || (pie.Radius > length)) {
+				if ((start < end) && (start <= angle) && (angle <= end))
+					return true;
+				else if ((start > end) && (angle >= start) && (angle <= 360))
+					return true;
+				else if ((start > end) && (angle >= 0) && (angle <= end))
+					return true;
+			}
+			return false;
+		}
+
 		public static bool IsNumber(double number) {
 			return !double.IsNaN(number) && !double.IsInfinity(number);
 		}
@@ -499,7 +516,7 @@ namespace MyCAD.Methods {
 		}
 		#endregion
 
-		#region --- Get functions ---
+		#region Get functions
 		public static Arc GetArcWith3Points(Vector3 p1,Vector3 p2,Vector3 p3) {
 			double start, end;
 			Arc result = new Arc();
@@ -507,7 +524,7 @@ namespace MyCAD.Methods {
 			Circle c = GetCircleWith3Point(p1, p2, p3);
 
 			if (c.Radius>0) {
-				if (DeterminePointOfLine(new Line(p1, p3), p2) < 0) {
+				if (HelperClass.DeterminePointOfLine(new Line(p1, p3), p2) < 0) {
 					start = LineAngle(c.Center, p3);
 					end = LineAngle(c.Center, p1);
 				} else {
@@ -627,7 +644,7 @@ namespace MyCAD.Methods {
 			double end = angle;
 			double radius = center.DistanceFrom(p2);
 			double length = p1.DistanceFrom(p2);
-			double d = DeterminePointOfLine(new Line(p1, p2), p3);
+			double d = HelperClass.DeterminePointOfLine(new Line(p1, p2), p3);
 
 			switch (index) {
 				case 10: // 3-Points
@@ -636,7 +653,7 @@ namespace MyCAD.Methods {
 					start = center.AngleWith(p1);
 					end = center.AngleWith(p3);
 
-					if (DeterminePointOfLine(new Line(p1, p3), p2) < 0) {
+					if (HelperClass.DeterminePointOfLine(new Line(p1, p3), p2) < 0) {
 						start = center.AngleWith(p3);
 						end = center.AngleWith(p1);
 					}
@@ -948,36 +965,37 @@ namespace MyCAD.Methods {
 			return Math.Abs(d);
 		}
 
-		public static double DistancePointToLwPolyline(LwPolyline polyline,Vector3 point,out Vector3 PointOnLwPolyline) {
+		public static double DistancePointToLwPolyline(LwPolyline polyline,Vector3 point,out Vector3 PointOnLwPolyline, out int INDEX) {
 			double result = double.MaxValue;
 			PointOnLwPolyline = new Vector3();
+			List<EntityObject> entities = polyline.Explode();
+			int index = -1;
 
-			foreach (EntityObject entity in polyline.Explode()) {
-				switch (entity.Type) {
+			for (int i=0; i< entities.Count; i++) {
+				switch (entities[i].Type) {
 					case EntityType.Line:
-						double d = DistanceFromLine(entity as Line, point, out Vector3 v);
+						double d = DistanceFromLine(entities[i] as Line, point, out Vector3 v);
 						if (d < result) {
 							PointOnLwPolyline = v;
 							result = d;
+							index = i;
 						}
 						break;
 					case EntityType.Arc:
-						d = DistancePointToArc(entity as Arc, point, out v);
+						d = DistancePointToArc(entities[i] as Arc, point, out v);
 						if (d < result) {
 							PointOnLwPolyline = v;
 							result = d;
+							index = i;
 						}
 						break;
 				}
 			}
+			INDEX = index;
 			return result;
 		}
 		#endregion
-
-		private static double DeterminePointOfLine(Line line,Vector3 v) {
-			return (v.X-line.StartPoint.X)*(line.EndPoint.Y-line.StartPoint.Y)-(v.Y-line.StartPoint.Y)*(line.EndPoint.X-line.StartPoint.X);
-		}
-
+		
 		public static LwPolyline PointToRect(Vector3 firstCorner,Vector3 secondCorner, out int direction) {
 			double x = Math.Min(firstCorner.X, secondCorner.X);
 			double y = Math.Min(firstCorner.Y, secondCorner.Y);
@@ -1074,7 +1092,7 @@ namespace MyCAD.Methods {
 						d = DistanceFromLine(entities[i] as Line, mousePosition, out poSegment);
 						break;
 					case EntityType.LwPolyline:
-						d = DistancePointToLwPolyline(entities[i] as LwPolyline, mousePosition, out poSegment);
+						d = DistancePointToLwPolyline(entities[i] as LwPolyline, mousePosition, out poSegment, out int INDEX);
 						break;
 					case EntityType.Point:
 						poSegment = (entities[i] as Entities.Point).Position;
@@ -1105,11 +1123,11 @@ namespace MyCAD.Methods {
 							entities[i] = entities[i].CopyOrMove(fromPoint,toPoint) as EntityObject;
 							entities[i].DeSelect();
 							break;
-						case 2: // Rotate
+						case 3: // Rotate
 							entities[i] = entities[i].Rotate2D(fromPoint, fromPoint.AngleWith(toPoint)) as EntityObject;
 							entities[i].DeSelect();
 							break;
-						case 3: // Mirror
+						case 4: // Mirror
 							EntityObject entity = entities[i].Mirror2D(fromPoint, toPoint) as EntityObject;
 							
 							if (flags) {
@@ -1119,7 +1137,7 @@ namespace MyCAD.Methods {
 							}
 							entities[i].DeSelect();
 							break;
-						case 4: // Scale
+						case 5: // Scale
 							entities[i] = entities[i].Scale(fromPoint, fromPoint.DistanceFrom(toPoint)) as EntityObject;
 							entities[i].DeSelect();
 							break;
@@ -1151,6 +1169,42 @@ namespace MyCAD.Methods {
 					entities[i].DeSelect();
 				}
 			}
+		}
+
+		public static void Offset(List<EntityObject> entities,Vector3 insertPoint,double offsetValue) {
+			try {
+				foreach (EntityObject entity in entities) {
+					if (entity.IsSelected) {
+						switch (entity.Type) {
+							case EntityType.Arc:
+								Arc arc = (entity as Arc).Offset(insertPoint, offsetValue) as Arc;
+								if (arc != null)
+									entities.Add(arc);
+								break;
+							case EntityType.Circle:
+								Circle circle = (entity as Circle).Offset(insertPoint, offsetValue) as Circle;
+								if (circle != null)
+									entities.Add(circle);
+								break;
+							case EntityType.Ellipse:
+								Ellipse ellipse = (entity as Ellipse).Offset(insertPoint, offsetValue) as Ellipse;
+								if (ellipse != null)
+									entities.Add(ellipse);
+								break;
+							case EntityType.Line:
+								entities.Add((entity as Line).Offset(insertPoint, offsetValue) as EntityObject);
+								break;
+							case EntityType.LwPolyline:
+								entities.Add((entity as LwPolyline).Offset(insertPoint, offsetValue) as EntityObject);
+								break;
+							case EntityType.Point:
+								return;
+							case EntityType.Text:
+								return;
+						}
+					}
+				}
+			} catch { }
 		}
 
 		public static void SelectWindow(List<EntityObject> entities, Vector3 firstCorner, Vector3 secondCorner) {

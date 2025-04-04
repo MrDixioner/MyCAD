@@ -41,7 +41,7 @@ namespace MyCAD.Entities {
 				Vector3 first = new Vector3(center.X - radius, center.Y - radius);
 				Vector3 second = new Vector3(center.X + radius, center.Y + radius);
 
-				return Methods.Method.PointToRect(first, second, out direction);
+				return Method.PointToRect(first, second, out direction);
 			}
 		}
 
@@ -145,6 +145,20 @@ namespace MyCAD.Entities {
 				circle = circles[i];
 			}
 			return circles;
+		}
+
+		public override object Offset(Vector3 insertPoint, double offsetValue) {
+			bool flg = HelperClass.DeterminePointOfCircle(this, insertPoint);
+			double r = (flg) ? radius - offsetValue : radius + offsetValue;
+
+			if (r > 0) {
+				return new Circle {
+					Center = center,
+					Radius = r,
+					IsVisible = isVisible
+				};
+			} else
+				return null;		
 		}
 
 		public override object Clone() {

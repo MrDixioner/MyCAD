@@ -181,13 +181,13 @@ namespace MyCAD {
 						case 1: // Move
 							g.DrawEntity(pen, entities[i].CopyOrMove(fromPoint, toPoint) as EntityObject);
 							break;
-						case 2: // Rotate
+						case 3: // Rotate
 							g.DrawEntity(pen, entities[i].Rotate2D(fromPoint, fromPoint.AngleWith(toPoint)) as EntityObject);
 							break;
-						case 3: // Mirror
+						case 4: // Mirror
 							g.DrawEntity(pen, entities[i].Mirror2D(fromPoint, toPoint) as EntityObject);
 							break;
-						case 4: // Scale
+						case 5: // Scale
 							g.DrawEntity(pen, entities[i].Scale(fromPoint, fromPoint.DistanceFrom(toPoint)) as EntityObject);
 							break;
 					}
@@ -229,7 +229,6 @@ namespace MyCAD {
 			} catch { }			
 		}
 
-		#region Draw text
 		public static void DrawText(this Graphics g,Pen pen,Text text) {
 			try {
 				SolidBrush brush = new SolidBrush(pen.Color);
@@ -256,6 +255,41 @@ namespace MyCAD {
 				else
 					g.DrawString(text.Value, text.Font, brush1, _x[i], _y[j]);
 			} catch { }
+		}
+
+		#region Extended of Offset
+		private static bool Direction(EntityObject entity,Vector3 insertPoint) {
+			switch (entity.Type) {
+				case EntityType.Arc:
+					return HelperClass.DeterminePointOfArc(entity as Arc, insertPoint);
+				case EntityType.Circle:
+					return HelperClass.DeterminePointOfCircle(entity as Circle, insertPoint);
+				case EntityType.Ellipse:
+					return HelperClass.DeterminePointOfEllipse(entity as Ellipse, insertPoint);
+				case EntityType.Line:
+					double d = HelperClass.DeterminePointOfLine(entity as Line, insertPoint);
+					return (d < 0) ? false : true;
+				case EntityType.LwPolyline:
+					return HelperClass.DeterminePointOfPolyline(entity as LwPolyline, insertPoint);
+				case EntityType.Point:
+				case EntityType.Text:
+					break;
+				default:
+					return false;
+			}
+			return false;
+		}
+
+		public static void DrawExtendedOffset(this Graphics g,Pen pen,List<EntityObject> entities, Vector3 insertPoint, double offsetValue, out bool direction) {
+			bool flg = false;
+			for (int i = 0; i < entities.Count; i++) {
+				if (entities[i].IsSelected) {
+					EntityObject entity = entities[i].Offset(insertPoint, offsetValue) as EntityObject;
+					g.DrawEntity(pen, entity);
+					flg = Direction(entities[i], insertPoint);
+				}
+			}
+			direction = flg;
 		}
 		#endregion
 	}

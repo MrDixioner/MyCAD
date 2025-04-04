@@ -183,6 +183,16 @@ namespace MyCAD.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap OffsetIcon {
+            get {
+                object obj = ResourceManager.GetObject("OffsetIcon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap PointIcon {
             get {
                 object obj = ResourceManager.GetObject("PointIcon", resourceCulture);
